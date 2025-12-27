@@ -7,13 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Repository for Subject entity operations
  */
 @Repository
-public interface SubjectRepository extends JpaRepository<Subject, UUID> {
+public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
     /**
      * Find subject by code
@@ -33,7 +32,7 @@ public interface SubjectRepository extends JpaRepository<Subject, UUID> {
     /**
      * Find all subjects by faculty ID
      */
-    List<Subject> findByFacultyId(UUID facultyId);
+    List<Subject> findByFacultyId(Long facultyId);
 
     /**
      * Search subjects by name containing
@@ -44,4 +43,9 @@ public interface SubjectRepository extends JpaRepository<Subject, UUID> {
      * Search subjects by code containing
      */
     List<Subject> findByCodeContainingIgnoreCase(String code);
+
+    /**
+     * Check if subject exists by ID and faculty ID
+     */
+    boolean existsByIdAndFacultyId(Long id, Long facultyId);
 }

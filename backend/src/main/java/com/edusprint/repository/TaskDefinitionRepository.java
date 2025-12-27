@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 /**
  * Repository for TaskDefinition entity operations
  */
 @Repository
-public interface TaskDefinitionRepository extends JpaRepository<TaskDefinition, UUID> {
+public interface TaskDefinitionRepository extends JpaRepository<TaskDefinition, Long> {
 
     /**
      * Find all definitions for a task, ordered by index
@@ -22,7 +22,12 @@ public interface TaskDefinitionRepository extends JpaRepository<TaskDefinition, 
     /**
      * Find all definitions by task ID, ordered by index
      */
-    List<TaskDefinition> findByTaskIdOrderByOrderIndexAsc(UUID taskId);
+    List<TaskDefinition> findByTaskIdOrderByOrderIndexAsc(Long taskId);
+
+    /**
+     * Find definition by task ID
+     */
+    Optional<TaskDefinition> findByTaskId(Long taskId);
 
     /**
      * Delete all definitions for a task
@@ -32,5 +37,10 @@ public interface TaskDefinitionRepository extends JpaRepository<TaskDefinition, 
     /**
      * Delete all definitions by task ID
      */
-    void deleteByTaskId(UUID taskId);
+    void deleteByTaskId(Long taskId);
+
+    /**
+     * Count definitions by task
+     */
+    long countByTask(Task task);
 }
