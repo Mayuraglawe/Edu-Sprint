@@ -29,6 +29,8 @@ public class PenaltyService {
     public Penalty createPenalty(Penalty penalty) {
         penalty.setCreatedAt(LocalDateTime.now());
         penalty.setUpdatedAt(LocalDateTime.now());
+        // Example: log user info (placeholder, replace with actual user context if available)
+        log.info("User [system] is creating a penalty");
         Penalty saved = penaltyRepository.save(penalty);
         log.info("Created penalty: {}", saved.getId());
         return saved;
@@ -41,6 +43,8 @@ public class PenaltyService {
         penalty.setReason(penaltyDetails.getReason());
         penalty.setAmount(penaltyDetails.getAmount());
         penalty.setUpdatedAt(LocalDateTime.now());
+        // Example: log user info (placeholder, replace with actual user context if available)
+        log.info("User [system] is updating a penalty");
         Penalty updated = penaltyRepository.save(penalty);
         log.info("Updated penalty: {}", updated.getId());
         return updated;
